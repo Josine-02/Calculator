@@ -6,25 +6,22 @@ const operators ="+-x/"
 let operatorsArray = operators.split("")
 
 let question = []
+let result
 
 function displayText(input) {
     if (question.length >0 && 
         numbersArray.includes(input) && 
-        typeof(Number(question[question.length - 1])) == "number" ){
+        !operatorsArray.includes(question[question.length-1]) ){
         question[question.length-1] = (question[question.length-1] + input)}
-    
-    else if (operatorsArray.includes(input) || question.length==0 || operatorsArray.includes(question[question.length - 1]) ) {
-        question.push(input)   }
+    else if (question.length==0 && operatorsArray.includes(input)){
+        question[0]=String(result) 
+        question.push(input)}
+    else if (question.length==0 || operatorsArray.includes(input) || operatorsArray.includes(question[question.length - 1]) ) {
+            question.push(input)   }
     
     display.textContent = question.join("")
     return display.textContent 
 }
-
-// function displayText(input) {
-//     question.push(input)
-//     display.textContent = question.join("")
-//     return display.textContent
-// }
 
 function clearDisplay(){
     question =[]
@@ -52,17 +49,28 @@ function multiply(a,b){return a*b}
 function divide(a,b){return a/b}
 
 function compute(){
-    var number1 = Number(question[0])
 
-    var operator = question[1]
+    let number1 = Number(question[0])
 
-    var number2 = Number(question[2])
+    let operator = question[1]
 
-    let result = operate(operator, number1, number2)
+    let number2 = Number(question[2])
 
+    result = operate(operator, number1, number2)
+    
+    if (question.length > 3) {
+        for (i =3; i<question.length;i+=2){
+            number1 = result
+            operator = question[i]
+            number2 = Number(question[i+1])
+            result = operate(operator, number1, number2)
+        }
+    }
+    
     question = []
     display.textContent = result
-    return display.textContent}
+    return display.textContent
+}
 
 const equalsBtn = document.querySelector(".equals")
 equalsBtn.textContent = "="

@@ -5,8 +5,10 @@
     
 }
     .calculator{
-        height: 50%;
-        width: 80%;}
+        flex-grow:1;
+        max-height: 50%;
+        max-width: 510px;
+        }
     
 
         .display{
