@@ -7,7 +7,6 @@ let operatorsArray = operators.split("")
 
 let question = []
 let result
-// let displayFontSize = "80px"
 
 function displayText(input) {
     display.style.fontSize = "80px"
