@@ -7,8 +7,10 @@ let operatorsArray = operators.split("")
 
 let question = []
 let result
+// let displayFontSize = "80px"
 
 function displayText(input) {
+    display.style.fontSize = "80px"
     if (question.length >0 && 
         numbersArray.includes(input) && 
         !operatorsArray.includes(question[question.length-1]) ){
@@ -48,8 +50,16 @@ function multiply(a,b){return a*b}
 
 function divide(a,b){return a/b}
 
-function compute(){
+function divideByZero(){
+        display.textContent = "cannot divide by 0"
+        display.style.fontSize = "40px"
+        return display.textContent
+    }
 
+function compute(){
+    if (question[question.length-1] == "0" && question[1]== "/"){
+        return divideByZero()
+    }
     let number1 = Number(question[0])
 
     let operator = question[1]
@@ -59,16 +69,22 @@ function compute(){
     result = operate(operator, number1, number2)
     
     if (question.length > 3) {
+        if (operator=="/" && number2==0){
+            return divideByZero()
+        }
         for (i =3; i<question.length;i+=2){
             number1 = result
             operator = question[i]
             number2 = Number(question[i+1])
+            if (operator=="/" && number2==0){
+                    return divideByZero()
+                }
             result = operate(operator, number1, number2)
         }
     }
     
     question = []
-    display.textContent = result
+    display.textContent = (Math.floor(result*1000))/1000
     return display.textContent
 }
 
