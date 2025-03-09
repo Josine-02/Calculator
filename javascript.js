@@ -1,11 +1,30 @@
-var question = []
 var display = document.querySelector(".display")
 
+const numbers = "123456789C0="
+let numbersArray = numbers.split("")
+const operators ="+-x/"
+let operatorsArray = operators.split("")
+
+let question = []
+
 function displayText(input) {
-    question.push(input)
+    if (question.length >0 && 
+        numbersArray.includes(input) && 
+        typeof(Number(question[question.length - 1])) == "number" ){
+        question[question.length-1] = (question[question.length-1] + input)}
+    
+    else if (operatorsArray.includes(input) || question.length==0 || operatorsArray.includes(question[question.length - 1]) ) {
+        question.push(input)   }
+    
     display.textContent = question.join("")
-    return display.textContent
+    return display.textContent 
 }
+
+// function displayText(input) {
+//     question.push(input)
+//     display.textContent = question.join("")
+//     return display.textContent
+// }
 
 function clearDisplay(){
     question =[]
@@ -34,15 +53,16 @@ function divide(a,b){return a/b}
 
 function compute(){
     var number1 = Number(question[0])
+
     var operator = question[1]
+
     var number2 = Number(question[2])
 
     let result = operate(operator, number1, number2)
 
     question = []
     display.textContent = result
-    return display.textContent
-}
+    return display.textContent}
 
 const equalsBtn = document.querySelector(".equals")
 equalsBtn.textContent = "="
@@ -67,7 +87,6 @@ multiplyBtn.onclick = () => displayText("x")
 const divideBtn = document.querySelector(".divide")
 divideBtn.textContent="/"
 divideBtn.onclick = () => displayText("/")
-
 
 const oneBtn = document.querySelector(".one")
 oneBtn.textContent = "1"
@@ -108,3 +127,33 @@ nineBtn.onclick= () => displayText("9")
 const zeroBtn=document.querySelector(".zero")
 zeroBtn.textContent="0"
 zeroBtn.onclick= () => displayText("0")    
+
+// make buttons via functions => delete buttons in html!
+
+// const numbers = "123456789C0="
+// let numbersArray = numbers.split("")
+// const operators ="+-x/"
+// let operatorsArry = operators.split("")
+
+// makeButtons(numbers)
+// makeButtons(operators)
+
+// function makeButtons(buttonString){
+//     let container;
+//     if(buttonString == "123456789C0=") {
+//         container = document.querySelector(".numbers")} 
+//     else if(buttonString =="+-x/") {
+//         container = document.querySelector(".operators")} 
+//         if (!container) return; 
+
+//     let fragment = document.createDocumentFragment()
+
+//     let buttonArray = buttonString.split("")
+//     buttonArray.forEach(char =>{
+//         let btn = document.createElement("button")
+//         btn.textContent = char
+//         fragment.appendChild (btn);
+//     })
+//     container.appendChild(fragment);}
+    
+// create button onclick events
