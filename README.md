@@ -1,8 +1,8 @@
 # Calculator
-final foundations project of TOP
+final foundations project of TOP: finished!
 
-to do:
-- correct layout flex / max /min
+future improvements:
+- make the code more efficient
 - making buttons via functions
 - making onclick events via functions
 - add decimal button and functionality
